@@ -40,10 +40,13 @@ jobs:
                       poetry-local-${{ runner.os }}-${{ steps.py-version.outputs.python-version }}-
 
             - name: Install Poetry
-              run: curl -sSL https://install.python-poetry.org | python3 -
+              run: |
+                  curl -sSL https://install.python-poetry.org | python3 -
 
             - name: Install Dependencies
-              run: make install
+              run: |
+                  make install
+                  poetry add -D flake8 black pytest
 
             - name: Lint and Format Check
               run: make lint
