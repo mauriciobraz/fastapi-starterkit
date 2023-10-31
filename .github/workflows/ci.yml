@@ -46,7 +46,7 @@ jobs:
             - name: Install Dependencies
               run: |
                   make install
-                  poetry add -D flake8 black pytest
+                  poetry add -D flake8 black mypy pytest
 
             - name: Lint and Format Check
               run: make lint
