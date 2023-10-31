@@ -1,0 +1,52 @@
+name: Continuous Integration (CI)
+
+on:
+    - push
+    - pull_request
+    - workflow_dispatch
+
+jobs:
+    run:
+        runs-on: ubuntu-latest
+        timeout-minutes: 10
+
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v3
+
+            - name: Get Python Version
+              id: py-version
+              run: echo "::set-output name=python-version::$(cat .python-version)"
+
+            - name: Set up Python
+              uses: actions/setup-python@v2
+              with:
+                  python-version: ${{ steps.py-version.outputs.python-version }}
+
+            - name: Cache Poetry
+              uses: actions/cache@v2
+              with:
+                  path: ~/.cache/pypoetry
+                  key: poetry-cache-${{ runner.os }}-${{ steps.py-version.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
+                  restore-keys: |
+                      poetry-cache-${{ runner.os }}-${{ steps.py-version.outputs.python-version }}-
+
+            - name: Cache Packages
+              uses: actions/cache@v2
+              with:
+                  path: ~/.local
+                  key: poetry-local-${{ runner.os }}-${{ steps.py-version.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}-${{ hashFiles('.github/workflows/*.yml') }}
+                  restore-keys: |
+                      poetry-local-${{ runner.os }}-${{ steps.py-version.outputs.python-version }}-
+
+            - name: Install Poetry
+              run: curl -sSL https://install.python-poetry.org | python3 -
+
+            - name: Install Dependencies
+              run: make install
+
+            - name: Lint and Format Check
+              run: make lint
+
+            - name: Run Tests
+              run: make test

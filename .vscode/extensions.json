@@ -1,0 +1,16 @@
+{
+    "recommendations": [
+        // Python
+        "ms-python.python",
+        "ms-python.flake8",
+        "ms-python.typeshed",
+        "ms-python.black-formatter",
+
+        // Formatting
+        "tamasfe.even-better-toml",
+        "editorconfig.editorconfig",
+
+        // Package Management
+        "zeshuaro.vscode-python-poetry"
+    ]
+}

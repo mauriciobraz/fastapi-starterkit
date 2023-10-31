@@ -1,0 +1,37 @@
+{
+    "editor.tabSize": 4,
+    "editor.rulers": [88, 120],
+
+    "editor.trimAutoWhitespace": false,
+    "editor.wordBasedSuggestions": false,
+    "editor.inlineSuggest.enabled": true,
+    "editor.minimap.renderCharacters": false,
+
+    "files.trimFinalNewlines": true,
+    "files.insertFinalNewline": true,
+    "files.trimTrailingWhitespace": true,
+
+    "editor.formatOnSave": true,
+
+    "files.exclude": {
+        "**/.venv": true,
+        "**/.coverage": true,
+        "**/.mypy_cache": true,
+        "**/.pytest_cache": true,
+        "**/__pycache__": true
+    },
+
+    "python.analysis.typeCheckingMode": "basic",
+    "python.analysis.autoImportCompletions": true,
+
+    "[python]": {
+        "editor.defaultFormatter": "ms-python.black-formatter"
+    },
+
+    "[jsonc]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "python.testing.pytestArgs": ["tests"],
+    "python.testing.unittestEnabled": false,
+    "python.testing.pytestEnabled": true
+}

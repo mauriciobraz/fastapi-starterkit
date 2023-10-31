@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "fastapi-starterkit"
+version = "0.0.0"
+authors = ["Maurício Braz Gonçalves <https://github.com/mauriciobraz>"]
+description = "A scalable template with opinionated practices and configurations for FastAPI projects."
+
+[tool.poetry.scripts]
+start = "source.main:main"
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.poetry.dependencies]
+python = "3.10.11"
+flake8 = "^6.1.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
