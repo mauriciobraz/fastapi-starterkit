@@ -1,14 +1,11 @@
 [tool.poetry]
-name = "fastapi-starterkit"
+name = "source"
 version = "0.0.0"
 authors = ["Maurício Braz Gonçalves <https://github.com/mauriciobraz>"]
 description = "A scalable template with opinionated practices and configurations for FastAPI projects."
 
 [tool.poetry.scripts]
 start = "source.main:start"
-
-[tool.poetry.group.dev.dependencies]
-types-python-dateutil = "^2.8.19.14"
 
 [tool.black]
 line-length = 88
@@ -21,6 +18,13 @@ mypy = "^1.6.1"
 black = "^23.10.1"
 pytest = "^7.4.3"
 python-dateutil = "^2.8.2"
+uvicorn = "^0.23.2"
+python-dotenv = "^1.0.0"
+loguru = "^0.7.2"
+fastapi = "^0.104.1"
+
+[tool.poetry.group.dev.dependencies]
+types-python-dateutil = "^2.8.19.14"
 
 [build-system]
 requires = ["poetry-core"]

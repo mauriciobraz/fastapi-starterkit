@@ -61,7 +61,6 @@ def main() -> FastAPI:
     )
 
     app.include_router(
-        prefix="/",
         router=default_router,
     )
 
@@ -72,5 +71,4 @@ def start():
     uvicorn.run(
         app=main(),
         port=get_env_variable("PORT", 8000, int),
-        reload=get_env_variable("ENVIRONMENT", "development", str) == "development",
     )
