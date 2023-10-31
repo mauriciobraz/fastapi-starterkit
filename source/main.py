@@ -1,3 +1,4 @@
+from venv import logger
 import uvicorn
 
 from dotenv import load_dotenv
@@ -8,7 +9,6 @@ from pydantic import ValidationError
 from starlette.exceptions import HTTPException
 from starlette.middleware.cors import CORSMiddleware
 
-
 from .api.errors.exception_handlers import (
     DataException,
     ServiceException,
@@ -18,8 +18,10 @@ from .api.errors.exception_handlers import (
 from .api.routers.default_router import default_router
 
 from .helpers.dotenv import get_env_variable
+from .helpers.logger import setup_logger
 
 load_dotenv()
+setup_logger()
 
 
 def main() -> FastAPI:
@@ -67,8 +69,8 @@ def main() -> FastAPI:
     return app
 
 
-def start():
+def start() -> None:
     uvicorn.run(
         app=main(),
-        port=get_env_variable("PORT", 8000, int),
+        port=get_env_variable("PORT", int, 8000),
     )
