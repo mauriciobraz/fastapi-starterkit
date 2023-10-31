@@ -5,7 +5,7 @@ authors = ["Maurício Braz Gonçalves <https://github.com/mauriciobraz>"]
 description = "A scalable template with opinionated practices and configurations for FastAPI projects."
 
 [tool.poetry.scripts]
-start = "source.main:main"
+start = "source.main:start"
 
 [tool.black]
 line-length = 88
