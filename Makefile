@@ -21,13 +21,13 @@ install:
 
 .PHONY: fmt
 fmt:
-	poetry run black osiris/
+	poetry run black source/
 
 .PHONY: lint
 lint:
-	poetry run flake8 osiris/
-	poetry run black --check osiris/
-	poetry run mypy --ignore-missing-imports osiris/
+	poetry run flake8 source/
+	poetry run black --check source/
+	poetry run mypy --ignore-missing-imports source/
 
 .PHONY: test
 test:
