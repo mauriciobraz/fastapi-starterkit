@@ -7,6 +7,9 @@ description = "A scalable template with opinionated practices and configurations
 [tool.poetry.scripts]
 start = "source.main:start"
 
+[tool.poetry.group.dev.dependencies]
+types-python-dateutil = "^2.8.19.14"
+
 [tool.black]
 line-length = 88
 target-version = ["py39"]
@@ -17,6 +20,7 @@ flake8 = "^6.1.0"
 mypy = "^1.6.1"
 black = "^23.10.1"
 pytest = "^7.4.3"
+python-dateutil = "^2.8.2"
 
 [build-system]
 requires = ["poetry-core"]
