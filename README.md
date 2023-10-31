@@ -4,7 +4,7 @@ FastAPI StarterKit serves as a comprehensive boilerplate for FastAPI application
 
 ## Installation
 
-### Prerequisites
+### Prerequisites for Development
 
 - Python 3.10.11
 - [Poetry](https://python-poetry.org/) for dependency management
@@ -53,6 +53,80 @@ uvicorn source.main:app --reload
     ```bash
     docker run -p 8000:8000 fastapi-starterkit
     ```
+
+## Deployment
+
+Production deployments are streamlined through a Docker Compose setup, orchestrated via a `deploy` target in the Makefile. This setup ensures that both the FastAPI application and the Caddy server are built and run in a Dockerized environment, providing a level of isolation and consistency across deployments.
+
+### Prerequisites for Deployment
+
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) installed on the deployment machine.
+- A `Caddyfile` and `docker-compose.yml` file configured for your production environment.
+
+### Deployment Steps
+
+1. **Pull the Latest Code:**
+
+   Ensure you have the latest codebase with all the necessary configurations:
+
+    ```bash
+    git pull origin main
+    ```
+
+2. **Build and Deploy:**
+
+   Utilize the `deploy` target in the Makefile to build the Docker images and run the containers:
+
+    ```bash
+    make deploy
+    ```
+
+   This command performs the following actions:
+
+   - Builds the Docker images for the FastAPI application and the Caddy server as defined in the `docker-compose.yml` file.
+   - Runs the containers in detached mode, allowing them to run in the background.
+   - Sets up a network for the containers to communicate with each other.
+   - Ensures that the Caddy server automatically provisions SSL/TLS certificates for secure HTTPS connections.
+
+3. **Verify Deployment:**
+
+   After running the `make deploy` command, verify the deployment by navigating to your domain in a web browser:
+
+    ```plaintext
+    https://yourdomain.com
+    ```
+
+   You should see your FastAPI application running, secured with HTTPS.
+
+### Updating the Deployment
+
+To update the deployment with new code or configurations:
+
+1. **Pull the Latest Code:**
+
+    ```bash
+    git pull origin main
+    ```
+
+2. **Re-Deploy:**
+
+    ```bash
+    make deploy
+    ```
+
+### Troubleshooting
+
+If you encounter issues during the deployment process, check the logs of the Docker containers for any error messages:
+
+```bash
+docker-compose logs
+```
+
+You can also inspect individual containers for more detailed information:
+
+```bash
+docker inspect <container_name>
+```
 
 ## Continuous Integration (CI)
 

@@ -1,0 +1,43 @@
+version: "3.7"
+
+volumes:
+    caddy_data:
+    caddy_config:
+
+networks:
+    app_network:
+        driver: bridge
+
+services:
+    fastapi:
+        build: .
+        restart: unless-stopped
+        container_name: FastAPI
+        networks:
+            - app_network
+        ports:
+            - 8000:8000
+        healthcheck:
+            test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+            start_period: 15s
+            interval: 5m
+            timeout: 5s
+            retries: 3
+
+    caddy:
+        image: caddy:2-alpine
+        environment:
+            - DOMAIN=yourdomain.com
+            - PROXY_BACKEND=fastapi
+            - PROXY_PORT=8000
+        volumes:
+            - ./Caddyfile:/etc/caddy/Caddyfile
+            - caddy_data:/data
+            - caddy_config:/config
+        ports:
+            - "80:80"
+            - "443:443"
+        networks:
+            - app_network
+        labels:
+            com.example.description: Caddy Server

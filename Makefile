@@ -50,3 +50,7 @@ venv:
 	else \
 		echo "Poetry is not installed or not being used in this project."; \
 	fi
+
+.PHONY: deploy
+deploy:
+	docker-compose up --build -d
