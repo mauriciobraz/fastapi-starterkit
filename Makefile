@@ -1,3 +1,6 @@
+include .env
+export $(shell sed 's/=.*//' .env)
+
 USING_POETRY=$(shell grep "tool.poetry" pyproject.toml && echo "yes")
 PY_VERSION := $(shell cat .python-version)
 

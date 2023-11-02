@@ -1,9 +1,13 @@
-{
-    email $CADDY_EMAIL
-}
-
 {$CADDY_DOMAIN} {
-	reverse_proxy {$CADDY_PROXY_BACKEND}:{$CADDY_PROXY_PORT} {
-		header_down Strict-Transport-Security max-age=31536000;
+	encode gzip
+
+	reverse_proxy {$CADDY_PROXY_NAME}:{$CADDY_PROXY_PORT} {
+		lb_policy {$CADDY_LB_POLICY}
+		health_path {$CADDY_HEALTH_PATH}
+		health_interval {$CADDY_HEALTH_INTERVAL}
 	}
+
+	# On production, you might want to uncomment the following line, but that requires a valid email address
+	# and an existing DNS record for the domain (see https://caddyserver.com/docs/automatic-https#dns-challenge)
+	# tls {$CADDY_EMAIL}
 }
