@@ -1,5 +1,9 @@
-{$DOMAIN} {
-	reverse_proxy {$PROXY_BACKEND}:{$PROXY_PORT} {
+{
+    email $CADDY_EMAIL
+}
+
+{$CADDY_DOMAIN} {
+	reverse_proxy {$CADDY_PROXY_BACKEND}:{$CADDY_PROXY_PORT} {
 		header_down Strict-Transport-Security max-age=31536000;
 	}
 }

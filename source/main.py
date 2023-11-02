@@ -73,4 +73,5 @@ def start() -> None:
     uvicorn.run(
         app=main(),
         port=get_env_variable("PORT", int, 8000),
+        host=get_env_variable("HOST", str, "0.0.0.0"),
     )

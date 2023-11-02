@@ -53,4 +53,5 @@ venv:
 
 .PHONY: deploy
 deploy:
+	docker-compose down -v -t 1 --remove-orphans
 	docker-compose up --build -d

@@ -24,6 +24,9 @@ RUN pip install --no-cache-dir poetry \
 # Copy the source code
 COPY . /app/
 
+# Expose the port
+EXPOSE 8000
+
 # Set environment variables
 ENV ENVIRONMENT=production
 
