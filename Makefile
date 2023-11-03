@@ -1,5 +1,8 @@
-include .env
-export $(shell sed 's/=.*//' .env)
+# Order matters, it'll override the previous value if it's defined twice.
+ENV_FILES := $(wildcard ./.env.example ./.env)
+
+$(foreach file,$(ENV_FILES),$(eval include $(file)))
+$(foreach file,$(ENV_FILES),$(eval export))
 
 USING_POETRY=$(shell grep "tool.poetry" pyproject.toml && echo "yes")
 PY_VERSION := $(shell cat .python-version)
@@ -56,5 +59,8 @@ venv:
 
 .PHONY: deploy
 deploy:
-	docker-compose down -v -t 1 --remove-orphans
-	docker-compose up --build -d
+
+	@echo "Caddy Email: $(CADDY_EMAIL)"
+
+	# docker-compose down -v -t 1 --remove-orphans
+	# docker-compose up --build -d
