@@ -29,6 +29,10 @@ install:
 fmt:
 	poetry run black source/
 
+.PHONY type
+type:
+	poetry run mypy --ignore-missing-imports source/
+
 .PHONY: lint
 lint:
 	poetry run flake8 source/
@@ -59,8 +63,5 @@ venv:
 
 .PHONY: deploy
 deploy:
-
-	@echo "Caddy Email: $(CADDY_EMAIL)"
-
-	# docker-compose down -v -t 1 --remove-orphans
-	# docker-compose up --build -d
+	docker-compose down -v -t 1 --remove-orphans
+	docker-compose up --build -d
