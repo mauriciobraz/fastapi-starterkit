@@ -29,7 +29,7 @@ install:
 fmt:
 	poetry run black source/
 
-.PHONY type
+.PHONY: type
 type:
 	poetry run mypy --ignore-missing-imports source/
 
