@@ -2,12 +2,10 @@ import toml
 import pkg_resources
 
 from pathlib import Path
-from typing import Optional
-
-from .decorators.cache import memoize
+from functools import lru_cache
 
 
-@memoize
+@lru_cache
 def get_project_metadata() -> dict:
     """Get the project metadata from the pyproject.toml file.
 
